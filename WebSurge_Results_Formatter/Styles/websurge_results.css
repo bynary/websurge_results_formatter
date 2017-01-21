@@ -24,7 +24,6 @@ footer{
 	overflow: hidden;
 	margin: 20px;
 	display: flex;
-	
 }
 
 .row:nth-child(even){
@@ -88,4 +87,10 @@ footer{
 	color: #1b676b;
 	font-weight: bold;
 	font-size: 20px;
+}
+
+.detail{
+	overflow: hidden;
+	margin: 20px;
+	background: ;
 }
