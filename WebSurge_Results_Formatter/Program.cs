@@ -95,6 +95,9 @@ class Program
 			requestSummary.HttpVerb = request.HttpVerb;
 			requestSummary.SuccessCount = testResultList.Where(x => x.Url.Equals(request.Url) && x.IsError.Equals("false")).Count();
 			requestSummary.FailureCount = testResultList.Where(x => x.Url.Equals(request.Url) && x.IsError.Equals("true")).Count();
+			requestSummary.AverageRequestDuration = (int)testResultList.Where(x => x.Url.Equals(request.Url)).Average(x => Convert.ToInt32(x.TimeTakenMs));
+			requestSummary.MaxRequestDuration = testResultList.Where(x => x.Url.Equals(request.Url)).Max(x => Convert.ToInt32(x.TimeTakenMs));
+			requestSummary.MinRequestDuration = testResultList.Where(x => x.Url.Equals(request.Url)).Min(x => Convert.ToInt32(x.TimeTakenMs));
 
 			testRunSummary.RequestSummaryList.Add(requestSummary);
 		}
@@ -125,7 +128,7 @@ class Program
 		html.Append($"date time generated: {DateTime.Now}");
 		html.Append("</div>");
 		html.Append("</header>");
-		html.Append("<main>");
+		//html.Append("<main>");
 
 		foreach (var requestSummary in testRunSummary.RequestSummaryList)
 		{
@@ -139,6 +142,18 @@ class Program
 			html.Append("</div>");
 			html.Append("</div>");
 			html.Append("<div class=\"results\">");
+			html.Append("<div class=\"duration\">");
+			html.Append("<span class=\"duration-header\">Duration</span>");
+			html.Append("<div class=\"\">");
+			html.Append($"Avg: {requestSummary.AverageRequestDuration}ms");
+			html.Append("</div>");
+			html.Append("<div class=\"\">");
+			html.Append($"Min: {requestSummary.MinRequestDuration}ms");
+			html.Append("</div>");
+			html.Append("<div class=\"\">");
+			html.Append($"Max: {requestSummary.MaxRequestDuration}ms");
+			html.Append("</div>");
+			html.Append("</div>");
 			html.Append("<div class=\"result-count success\">");
 			html.Append($"Success: {requestSummary.SuccessCount}");
 			html.Append("</div>");
@@ -149,7 +164,7 @@ class Program
 			html.Append("</div>");
 		}
 
-		html.Append("</main>");
+		//html.Append("</main>");
 		html.Append("<footer>");
 		html.Append("<p>");
 		html.Append($"HTML WebSurge test results generated using WebSurge_Results_Formatter - &copy;{DateTime.Now.Year} Coding Inertia");
@@ -178,7 +193,6 @@ class Program
 	static void ExitWithMessage(string message)
 	{
 		Console.WriteLine(message);
-		PauseConsole();
 		Environment.Exit(0);
 	}
 

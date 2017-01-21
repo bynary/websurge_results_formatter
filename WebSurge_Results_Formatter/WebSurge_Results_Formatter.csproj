@@ -11,7 +11,9 @@
     <EmbeddedResource Include="**\*.resx" />
     <Compile Remove="TestResults.cs" />
     <Compile Remove="TestResultList.cs" />
-    <EmbeddedResource Include="Styles\websurge_results.css" />
+    <EmbeddedResource Include="Styles\websurge_results.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
