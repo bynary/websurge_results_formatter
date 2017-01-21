@@ -1,4 +1,5 @@
-﻿namespace Html_Formatter
+﻿using System;
+namespace Html_Formatter
 {
 	public class RequestSummary
 	{
@@ -9,5 +10,9 @@
 		public int AverageRequestDuration;
 		public int MinRequestDuration;
 		public int MaxRequestDuration;
+		public string Timestamp;
+		public DateTime StartTime;
+		public DateTime EndTime;
+		public TimeSpan Duration;
 	}
 }

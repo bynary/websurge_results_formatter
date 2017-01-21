@@ -98,6 +98,9 @@ class Program
 			requestSummary.AverageRequestDuration = (int)testResultList.Where(x => x.Url.Equals(request.Url)).Average(x => Convert.ToInt32(x.TimeTakenMs));
 			requestSummary.MaxRequestDuration = testResultList.Where(x => x.Url.Equals(request.Url)).Max(x => Convert.ToInt32(x.TimeTakenMs));
 			requestSummary.MinRequestDuration = testResultList.Where(x => x.Url.Equals(request.Url)).Min(x => Convert.ToInt32(x.TimeTakenMs));
+			requestSummary.StartTime = testResultList.Where(x => x.Url.Equals(request.Url)).Min(x => Convert.ToDateTime(x.TimeStamp));
+			requestSummary.EndTime = testResultList.Where(x => x.Url.Equals(request.Url)).Max(x => Convert.ToDateTime(x.TimeStamp));
+			requestSummary.Duration = requestSummary.EndTime - requestSummary.StartTime;
 
 			testRunSummary.RequestSummaryList.Add(requestSummary);
 		}
@@ -143,7 +146,7 @@ class Program
 			html.Append("</div>");
 			html.Append("<div class=\"results\">");
 			html.Append("<div class=\"duration\">");
-			html.Append("<span class=\"duration-header\">Duration</span>");
+			html.Append("<span class=\"duration-header\">Request duration</span>");
 			html.Append("<div class=\"\">");
 			html.Append($"Avg: {requestSummary.AverageRequestDuration}ms");
 			html.Append("</div>");
@@ -161,7 +164,14 @@ class Program
 			html.Append($"Fail: {requestSummary.FailureCount}");
 			html.Append("</div>");
 			html.Append("</div>");
-			html.Append("</div>");
+			//html.Append("</div>");
+			//html.Append("<details>");
+			//html.Append("<summary>");
+			//html.Append("click for more details");
+			//html.Append("</summary>");
+			//html.Append("<p>");
+			//html.Append("</p>");
+			//html.Append("</details>");
 		}
 
 		//html.Append("</main>");
